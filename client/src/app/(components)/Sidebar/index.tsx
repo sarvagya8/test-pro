@@ -82,7 +82,7 @@ const Sidebar = () => {
         }`}
       >
         <Image
-          src="https://s3-inventorymanagement.s3.us-east-2.amazonaws.com/logo.png"
+          src={`${process.env.NEXT_PUBLIC_IMG_BASE_URL}logo.jpg`}
           alt="edstock-logo"
           width={27}
           height={27}
