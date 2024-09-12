@@ -93,7 +93,7 @@ const Products = () => {
                   {product.name}
                 </h3>
                 <p className="text-gray-800">Avg Cost: ${product.price.toFixed(2)}</p>
-                <p className="text-gray-800">Total Purchase: ${product.price.toFixed(2) * 2}</p>
+                <p className="text-gray-800">Total Purchase: ${product.price.toFixed(2)}</p>
                 <div className="text-sm text-gray-600 mt-1">
                   Stock: {product.stockQuantity}
                 </div>
