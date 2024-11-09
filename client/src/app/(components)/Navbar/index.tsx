@@ -58,12 +58,12 @@ const Navbar = () => {
               )}
             </button>
           </div>
-          <div className="relative">
+          {/* <div className="relative">
             <Bell className="cursor-pointer text-gray-500" size={24} />
             <span className="absolute -top-2 -right-2 inline-flex items-center justify-center px-[0.4rem] py-1 text-xs font-semibold leading-none text-red-100 bg-red-400 rounded-full">
               3
             </span>
-          </div>
+          </div> */}
           <hr className="w-0 h-7 border border-solid border-l border-gray-300 mx-3" />
           <div className="flex items-center gap-3 cursor-pointer">
             <Image
@@ -73,12 +73,12 @@ const Navbar = () => {
               height={50}
               className="rounded-full h-full object-cover"
             />
-            <span className="font-semibold">Ed Roh</span>
+            <span className="font-semibold">Samyak Jain</span>
           </div>
         </div>
-        <Link href="/settings">
+        {/* <Link href="/settings">
           <Settings className="cursor-pointer text-gray-500" size={24} />
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

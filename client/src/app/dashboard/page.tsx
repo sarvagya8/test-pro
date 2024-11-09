@@ -15,11 +15,11 @@ import StatCard from "./StatCard";
 
 const Dashboard = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 xl:overflow-auto gap-10 pb-4 custom-grid-rows">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 xl:overflow-auto gap-10 pb-4 custom-grid-rows">
       <CardPopularProducts />
       <CardSalesSummary />
-      <CardPurchaseSummary />
-      <CardExpenseSummary />
+      {/* <CardPurchaseSummary /> */}
+      {/* <CardExpenseSummary />
       <StatCard
         title="Customer & Expenses"
         primaryIcon={<Package className="text-blue-600 w-6 h-6" />}
@@ -76,7 +76,7 @@ const Dashboard = () => {
             IconComponent: TrendingDown,
           },
         ]}
-      />
+      /> */}
     </div>
   );
 };

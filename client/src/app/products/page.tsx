@@ -7,6 +7,8 @@ import Header from "@/app/(components)/Header";
 import Rating from "@/app/(components)/Rating";
 import CreateProductModal from "./CreateProductModal";
 import Image from "next/image";
+import { products } from "@/state/sample";
+import { formatAmount } from "@/utils/formatAmount";
 
 type ProductFormData = {
   name: string;
@@ -20,7 +22,7 @@ const Products = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
-    data: products,
+    data: productsAPI,
     isLoading,
     isError,
   } = useGetProductsQuery(searchTerm);
@@ -34,7 +36,7 @@ const Products = () => {
     return <div className="py-4">Loading...</div>;
   }
 
-  if (isError || !products) {
+  if (isError || !productsAPI) {
     return (
       <div className="text-center text-red-500 py-4">
         Failed to fetch products
@@ -76,32 +78,32 @@ const Products = () => {
         ) : (
           products?.map((product) => (
             <div
-              key={product.productId}
+              key={product.name}
               className="border shadow rounded-md p-4 max-w-full w-full mx-auto"
             >
-              <div className="flex flex-col items-center">
+              <div className="flex flex-row items-center gap-3">
                 <Image
-                src={`${process.env.NEXT_PUBLIC_IMG_BASE_URL}product${
-                  Math.floor(Math.random() * 3) + 1
-                }.png`}
+                src={product.image}
                   alt={product.name}
                   width={150}
                   height={150}
-                  className="mb-3 rounded-2xl w-36 h-36"
+                  className="mb-3 rounded-2xl w-36 h-36 object-contain"
                 />
-                <h3 className="text-lg text-gray-900 font-semibold">
-                  {product.name}
-                </h3>
-                <p className="text-gray-800">Avg Cost: ${product.price.toFixed(2)}</p>
-                <p className="text-gray-800">Total Purchase: ${product.price.toFixed(2)}</p>
-                <div className="text-sm text-gray-600 mt-1">
-                  Stock: {product.stockQuantity}
-                </div>
-                {product.rating && (
-                  <div className="flex items-center mt-2">
-                    <Rating rating={product.rating} />
+                <div>
+                  <h3 className="text-lg text-gray-900 font-semibold">
+                    {product.name}
+                  </h3>
+                  <p className="text-gray-800">Avg Cost: {formatAmount(Number(product.cost))}</p>
+                  <p className="text-gray-800">Total Purchase: {formatAmount((Number(product.cost) * Number(product.quantity) * 1000))}</p>
+                  <div className="text-sm text-gray-600 mt-1">
+                    Stock: {product.quantity}k
                   </div>
-                )}
+                  {product?.rating && (
+                    <div className="flex items-center mt-2">
+                      <Rating rating={product.rating} />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ))

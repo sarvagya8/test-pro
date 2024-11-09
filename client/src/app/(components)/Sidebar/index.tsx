@@ -82,8 +82,8 @@ const Sidebar = () => {
         }`}
       >
         <Image
-          src={`${process.env.NEXT_PUBLIC_IMG_BASE_URL}logo.jpg`}
-          alt="edstock-logo"
+          src='/6896.jpg'
+          alt="logo"
           width={27}
           height={27}
           className="rounded w-8"
@@ -93,7 +93,7 @@ const Sidebar = () => {
             isSidebarCollapsed ? "hidden" : "block"
           } font-extrabold text-2xl`}
         >
-          EDSTOCK
+          STOCK
         </h1>
 
         <button
@@ -127,10 +127,10 @@ const Sidebar = () => {
         <SidebarLink
           href="/users"
           icon={User}
-          label="Users"
+          label="Suppliers"
           isCollapsed={isSidebarCollapsed}
         />
-        <SidebarLink
+        {/* <SidebarLink
           href="/settings"
           icon={SlidersHorizontal}
           label="Settings"
@@ -141,7 +141,7 @@ const Sidebar = () => {
           icon={CircleDollarSign}
           label="Expenses"
           isCollapsed={isSidebarCollapsed}
-        />
+        /> */}
       </div>
 
       {/* FOOTER */}

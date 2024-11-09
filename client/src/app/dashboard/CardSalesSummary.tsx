@@ -15,7 +15,7 @@ const CardSalesSummary = () => {
   const { data, isLoading, isError } = useGetDashboardMetricsQuery();
   const salesData = data?.salesSummary || [];
 
-  const [timeframe, setTimeframe] = useState("weekly");
+  const [timeFrame, setTimeFrame] = useState("weekly");
 
   const totalValueSum =
     salesData.reduce((acc, curr) => acc + curr.totalValue, 0) || 0;
@@ -42,7 +42,7 @@ const CardSalesSummary = () => {
   }
 
   return (
-    <div className="row-span-3 xl:row-span-6 bg-white shadow-md rounded-2xl flex flex-col justify-between">
+    <div className="row-span-3 xl:row-span-7 bg-white shadow-md rounded-2xl flex flex-col justify-between">
       {isLoading ? (
         <div className="m-5">Loading...</div>
       ) : (
@@ -50,7 +50,7 @@ const CardSalesSummary = () => {
           {/* HEADER */}
           <div>
             <h2 className="text-lg font-semibold mb-2 px-7 pt-5">
-              Sales Summary
+              Purchases Summary
             </h2>
             <hr />
           </div>
@@ -62,11 +62,11 @@ const CardSalesSummary = () => {
               <div className="text-lg font-medium">
                 <p className="text-xs text-gray-400">Value</p>
                 <span className="text-2xl font-extrabold">
-                  $
+                  ₹
                   {(totalValueSum / 1000000).toLocaleString("en", {
                     maximumFractionDigits: 2,
                   })}
-                  m
+                  L
                 </span>
                 <span className="text-green-500 text-sm ml-2">
                   <TrendingUp className="inline w-4 h-4 mr-1" />
@@ -75,9 +75,9 @@ const CardSalesSummary = () => {
               </div>
               <select
                 className="shadow-sm border border-gray-300 bg-white p-2 rounded"
-                value={timeframe}
+                value={timeFrame}
                 onChange={(e) => {
-                  setTimeframe(e.target.value);
+                  setTimeFrame(e.target.value);
                 }}
               >
                 <option value="daily">Daily</option>
@@ -96,12 +96,12 @@ const CardSalesSummary = () => {
                   dataKey="date"
                   tickFormatter={(value) => {
                     const date = new Date(value);
-                    return `${date.getMonth() + 1}/${date.getDate()}`;
+                    return `${date.getDate()}/${date.getMonth() + 1}`;
                   }}
                 />
                 <YAxis
                   tickFormatter={(value) => {
-                    return `$${(value / 1000000).toFixed(0)}m`;
+                    return `₹${(value / 1000000).toFixed(0)}L`;
                   }}
                   tick={{ fontSize: 12, dx: -1 }}
                   tickLine={false}
@@ -109,11 +109,11 @@ const CardSalesSummary = () => {
                 />
                 <Tooltip
                   formatter={(value: number) => [
-                    `$${value.toLocaleString("en")}`,
+                    `₹${value.toLocaleString("en")}`,
                   ]}
                   labelFormatter={(label) => {
                     const date = new Date(label);
-                    return date.toLocaleDateString("en-US", {
+                    return date.toLocaleDateString("en-IN", {
                       year: "numeric",
                       month: "long",
                       day: "numeric",

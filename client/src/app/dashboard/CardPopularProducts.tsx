@@ -3,12 +3,13 @@ import { ShoppingBag } from "lucide-react";
 import React from "react";
 import Rating from "../(components)/Rating";
 import Image from "next/image";
+import { products } from "@/state/sample";
 
 const CardPopularProducts = () => {
   const { data: dashboardMetrics, isLoading } = useGetDashboardMetricsQuery();
 
   return (
-    <div className="row-span-3 xl:row-span-6 bg-white shadow-md rounded-2xl pb-16">
+    <div className="row-span-3 xl:row-span-8 bg-white shadow-md rounded-2xl pb-16">
       {isLoading ? (
         <div className="m-5">Loading...</div>
       ) : (
@@ -18,20 +19,18 @@ const CardPopularProducts = () => {
           </h3>
           <hr />
           <div className="overflow-auto h-full">
-            {dashboardMetrics?.popularProducts.map((product) => (
+            {products.map((product) => (
               <div
-                key={product.productId}
+                key={product.name}
                 className="flex items-center justify-between gap-3 px-5 py-7 border-b"
               >
                 <div className="flex items-center gap-3">
                   <Image
-              src={`${process.env.NEXT_PUBLIC_IMG_BASE_URL}product${
-                      Math.floor(Math.random() * 3) + 1
-                    }.png`}
+              src={product.image}
                     alt={product.name}
                     width={48}
                     height={48}
-                    className="rounded-lg w-14 h-14"
+                    className="rounded-lg w-14 h-14 object-contain"
                   />
                   <div className="flex flex-col justify-between gap-1">
                     <div className="font-bold text-gray-700">
@@ -39,10 +38,10 @@ const CardPopularProducts = () => {
                     </div>
                     <div className="flex text-sm items-center">
                       <span className="font-bold text-blue-500 text-xs">
-                        ${product.price}
+                        ₹{product.cost}
                       </span>
-                      <span className="mx-2">|</span>
-                      <Rating rating={product.rating || 0} />
+                      {/* <span className="mx-2">|</span>
+                      <Rating rating={product.rating || 0} /> */}
                     </div>
                   </div>
                 </div>
@@ -51,7 +50,7 @@ const CardPopularProducts = () => {
                   <button className="p-2 rounded-full bg-blue-100 text-blue-600 mr-2">
                     <ShoppingBag className="w-4 h-4" />
                   </button>
-                  {Math.round(product.stockQuantity / 1000)}k Sold
+                  {Math.round(Number(product.quantity) * 1000 / 1000)}k Purchased
                 </div>
               </div>
             ))}
